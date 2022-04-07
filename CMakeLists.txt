@@ -11,7 +11,12 @@ find_package(ASSIMP REQUIRED)
 
 include_directories(include/)
 
+
+
 add_subdirectory(external/glad)
+add_subdirectory(include/imgui)
+
 add_executable(RG_projekat main.cpp stb_image.cpp include/Camera.h include/Mesh.h include/Model.h include/Lampa.h)
-target_link_libraries(RG_projekat glad glfw ${CMAKE_DL_LIBS} assimp)
+target_link_libraries(RG_projekat glad glfw ${CMAKE_DL_LIBS} assimp imgui)
+
 

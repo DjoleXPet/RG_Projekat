@@ -10,20 +10,26 @@
 #include <Model.h>
 #include <Lampa.h>
 
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
+
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
 
 void renderQuad();
-
+void DrawImGui();
 
 unsigned int loadTexture(char const * path);
 unsigned int loadCubemap(vector<std::string> faces);
 
 
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 1280;
+const unsigned int SCR_HEIGHT = 720;
 
 Camera camera = Camera();
 Lampa lampaSettings = Lampa();
@@ -34,6 +40,9 @@ float lastY =  SCR_HEIGHT / 2.0;
 
 bool bloom = true;
 bool bloomKeyPressed = false;
+float exposure = 1.0f;
+
+bool ImGuiEnabled = false;
 
 float deltaTime = 0.0f;	// Time between current frame and last frame
 float lastFrame = 0.0f; // Time of last frame
@@ -66,6 +75,21 @@ int main() {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
+
+    if (ImGuiEnabled) {
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+    }
+    // Init Imgui
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO &io = ImGui::GetIO();
+    (void) io;
+
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 450 core");
+
+
+
     glEnable(GL_DEPTH_TEST);
     // SHADER
     Shader shaderCube("../resources/shaders/cubeVShader.vs", "../resources/shaders/cubeFShader.fs");
@@ -397,6 +421,7 @@ int main() {
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
+    glfwSetKeyCallback(window, key_callback);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 
@@ -404,8 +429,6 @@ int main() {
     camera.Front = glm::vec3(0,0,-1);
     camera.WorldUp = glm::vec3(0,1,0);
 
-//    Model ranac("../resources/objects/backpack/backpack.obj");
-//    ranac.SetShaderTextureNamePrefix("material.");
     Model sator("../resources/objects/sator3/10495_Green_Mesh_Tent_V1_L3.obj");
     Model drvo("../resources/objects/drvo/drvo.obj");
     Model lampa("../resources/objects/lampa/Flashlight.obj");
@@ -472,8 +495,8 @@ int main() {
         shaderMoon.setUniformMat4("view", view);
 
         shaderMoon.setUniform3f("dirLight.direction", -lightPos);
-        shaderMoon.setUniform3f("dirLight.ambient", 50.0f*lightColor);
-        shaderMoon.setUniform3f("dirLight.diffuse", lightColor);
+        shaderMoon.setUniform3f("dirLight.ambient", lightColor);
+        shaderMoon.setUniform3f("dirLight.diffuse", 10.0f*lightColor);
         shaderMoon.setUniform3f("dirLight.specular", lightColor);
 
         shaderMoon.setUniform3f("spotLight.position",  lampaSettings.position);
@@ -707,7 +730,6 @@ int main() {
         // 3. now render floating point color buffer to 2D quad and tonemap HDR colors to default framebuffer's (clamped) color range
         // --------------------------------------------------------------------------------------------------------------------------
 
-
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         shaderBloom.use();
         glActiveTexture(GL_TEXTURE0);
@@ -715,12 +737,16 @@ int main() {
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, pingpongColorbuffers[!horizontal]);
 
-        bloom = true;
-        float exposure = 1.0f;
+
         shaderBloom.setInt("bloom", bloom);
         shaderBloom.setFloat("exposure", exposure);
         renderQuad();
+     //   std::cout << "bloom: " << (bloom ? "on" : "off") << std::endl;
 
+
+
+        if (ImGuiEnabled)
+            DrawImGui();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -730,6 +756,11 @@ int main() {
     shaderCube.deleteProgram();
     shaderGround.deleteProgram();
     shaderLight.deleteProgram();
+
+
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
 
     glfwTerminate();
     return 0;
@@ -805,7 +836,24 @@ void processInput(GLFWwindow *window) {
     {
         bloomKeyPressed = false;
     }
+
+
+
 }
+
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
+    if (key == GLFW_KEY_TAB && action == GLFW_PRESS) {
+        ImGuiEnabled = !ImGuiEnabled;
+        if (ImGuiEnabled) {
+            // CameraMouseMovementUpdateEnabled = false;
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        } else {
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+        }
+    }
+}
+
+
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -831,8 +879,8 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 
     lastX = xpos;
     lastY = ypos;
-
-    camera.ProcessMouseMovement(xoffset, yoffset);
+    if(ImGuiEnabled == false)
+        camera.ProcessMouseMovement(xoffset, yoffset);
 }
 
 // glfw: whenever the mouse scroll wheel scrolls, this callback is called
@@ -993,3 +1041,20 @@ void renderCube()
     glBindVertexArray(0);
 }
 
+
+void DrawImGui() {
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+
+
+    {
+        ImGui::Begin("Lamp Settings");
+        ImGui::ColorEdit3("Lamp Diffuse color" , (float*)&lampaSettings.diffuse);
+        ImGui::ColorEdit3("Lamp Specular color" , (float*)&lampaSettings.specular);
+        ImGui::End();
+    }
+
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}

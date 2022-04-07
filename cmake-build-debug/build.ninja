@@ -70,19 +70,21 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 #############################################
 # Order-only phony target for RG_projekat
 
-build cmake_object_order_depends_target_RG_projekat: phony || cmake_object_order_depends_target_glad
+build cmake_object_order_depends_target_RG_projekat: phony || cmake_object_order_depends_target_glad cmake_object_order_depends_target_imgui
 
 build CMakeFiles/RG_projekat.dir/main.cpp.o: CXX_COMPILER__RG_projekat_Debug /home/djole/CLionProjects/RG_projekat_svetlo/main.cpp || cmake_object_order_depends_target_RG_projekat
+  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD
   DEP_FILE = CMakeFiles/RG_projekat.dir/main.cpp.o.d
   FLAGS = -g -std=gnu++17
-  INCLUDES = -I/home/djole/CLionProjects/RG_projekat_svetlo/include -I/home/djole/CLionProjects/RG_projekat_svetlo/external/glad/include
+  INCLUDES = -I/home/djole/CLionProjects/RG_projekat_svetlo/include -I/home/djole/CLionProjects/RG_projekat_svetlo/external/glad/include -I/home/djole/CLionProjects/RG_projekat_svetlo/include/imgui/include
   OBJECT_DIR = CMakeFiles/RG_projekat.dir
   OBJECT_FILE_DIR = CMakeFiles/RG_projekat.dir
 
 build CMakeFiles/RG_projekat.dir/stb_image.cpp.o: CXX_COMPILER__RG_projekat_Debug /home/djole/CLionProjects/RG_projekat_svetlo/stb_image.cpp || cmake_object_order_depends_target_RG_projekat
+  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD
   DEP_FILE = CMakeFiles/RG_projekat.dir/stb_image.cpp.o.d
   FLAGS = -g -std=gnu++17
-  INCLUDES = -I/home/djole/CLionProjects/RG_projekat_svetlo/include -I/home/djole/CLionProjects/RG_projekat_svetlo/external/glad/include
+  INCLUDES = -I/home/djole/CLionProjects/RG_projekat_svetlo/include -I/home/djole/CLionProjects/RG_projekat_svetlo/external/glad/include -I/home/djole/CLionProjects/RG_projekat_svetlo/include/imgui/include
   OBJECT_DIR = CMakeFiles/RG_projekat.dir
   OBJECT_FILE_DIR = CMakeFiles/RG_projekat.dir
 
@@ -94,9 +96,9 @@ build CMakeFiles/RG_projekat.dir/stb_image.cpp.o: CXX_COMPILER__RG_projekat_Debu
 #############################################
 # Link the executable RG_projekat
 
-build RG_projekat: CXX_EXECUTABLE_LINKER__RG_projekat_Debug CMakeFiles/RG_projekat.dir/main.cpp.o CMakeFiles/RG_projekat.dir/stb_image.cpp.o | external/glad/libglad.a /usr/lib/x86_64-linux-gnu/libglfw.so.3.3 || external/glad/libglad.a
+build RG_projekat: CXX_EXECUTABLE_LINKER__RG_projekat_Debug CMakeFiles/RG_projekat.dir/main.cpp.o CMakeFiles/RG_projekat.dir/stb_image.cpp.o | external/glad/libglad.a /usr/lib/x86_64-linux-gnu/libglfw.so.3.3 include/imgui/libimgui.a external/glad/libglad.a || external/glad/libglad.a include/imgui/libimgui.a
   FLAGS = -g
-  LINK_LIBRARIES = external/glad/libglad.a  /usr/lib/x86_64-linux-gnu/libglfw.so.3.3  -ldl  -lassimp
+  LINK_LIBRARIES = external/glad/libglad.a  /usr/lib/x86_64-linux-gnu/libglfw.so.3.3  -ldl  -lassimp  include/imgui/libimgui.a  external/glad/libglad.a
   OBJECT_DIR = CMakeFiles/RG_projekat.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -164,11 +166,124 @@ build external/glad/libglad.a: C_STATIC_LIBRARY_LINKER__glad_Debug external/glad
   TARGET_PDB = glad.a.dbg
 
 # =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /home/djole/CLionProjects/RG_projekat_svetlo/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build include/imgui/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/djole/CLionProjects/RG_projekat_svetlo/cmake-build-debug/include/imgui && /snap/clion/184/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/djole/CLionProjects/RG_projekat_svetlo -B/home/djole/CLionProjects/RG_projekat_svetlo/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build include/imgui/rebuild_cache: phony include/imgui/CMakeFiles/rebuild_cache.util
+
+
+#############################################
+# Utility command for edit_cache
+
+build include/imgui/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/djole/CLionProjects/RG_projekat_svetlo/cmake-build-debug/include/imgui && /snap/clion/184/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build include/imgui/edit_cache: phony include/imgui/CMakeFiles/edit_cache.util
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target imgui
+
+
+#############################################
+# Order-only phony target for imgui
+
+build cmake_object_order_depends_target_imgui: phony || cmake_object_order_depends_target_glad
+
+build include/imgui/CMakeFiles/imgui.dir/src/imgui.cpp.o: CXX_COMPILER__imgui_Debug /home/djole/CLionProjects/RG_projekat_svetlo/include/imgui/src/imgui.cpp || cmake_object_order_depends_target_imgui
+  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD
+  DEP_FILE = include/imgui/CMakeFiles/imgui.dir/src/imgui.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I/home/djole/CLionProjects/RG_projekat_svetlo/include -I/home/djole/CLionProjects/RG_projekat_svetlo/include/imgui/include -I/home/djole/CLionProjects/RG_projekat_svetlo/external/glad/include
+  OBJECT_DIR = include/imgui/CMakeFiles/imgui.dir
+  OBJECT_FILE_DIR = include/imgui/CMakeFiles/imgui.dir/src
+
+build include/imgui/CMakeFiles/imgui.dir/src/imgui_demo.cpp.o: CXX_COMPILER__imgui_Debug /home/djole/CLionProjects/RG_projekat_svetlo/include/imgui/src/imgui_demo.cpp || cmake_object_order_depends_target_imgui
+  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD
+  DEP_FILE = include/imgui/CMakeFiles/imgui.dir/src/imgui_demo.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I/home/djole/CLionProjects/RG_projekat_svetlo/include -I/home/djole/CLionProjects/RG_projekat_svetlo/include/imgui/include -I/home/djole/CLionProjects/RG_projekat_svetlo/external/glad/include
+  OBJECT_DIR = include/imgui/CMakeFiles/imgui.dir
+  OBJECT_FILE_DIR = include/imgui/CMakeFiles/imgui.dir/src
+
+build include/imgui/CMakeFiles/imgui.dir/src/imgui_draw.cpp.o: CXX_COMPILER__imgui_Debug /home/djole/CLionProjects/RG_projekat_svetlo/include/imgui/src/imgui_draw.cpp || cmake_object_order_depends_target_imgui
+  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD
+  DEP_FILE = include/imgui/CMakeFiles/imgui.dir/src/imgui_draw.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I/home/djole/CLionProjects/RG_projekat_svetlo/include -I/home/djole/CLionProjects/RG_projekat_svetlo/include/imgui/include -I/home/djole/CLionProjects/RG_projekat_svetlo/external/glad/include
+  OBJECT_DIR = include/imgui/CMakeFiles/imgui.dir
+  OBJECT_FILE_DIR = include/imgui/CMakeFiles/imgui.dir/src
+
+build include/imgui/CMakeFiles/imgui.dir/src/imgui_impl_glfw.cpp.o: CXX_COMPILER__imgui_Debug /home/djole/CLionProjects/RG_projekat_svetlo/include/imgui/src/imgui_impl_glfw.cpp || cmake_object_order_depends_target_imgui
+  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD
+  DEP_FILE = include/imgui/CMakeFiles/imgui.dir/src/imgui_impl_glfw.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I/home/djole/CLionProjects/RG_projekat_svetlo/include -I/home/djole/CLionProjects/RG_projekat_svetlo/include/imgui/include -I/home/djole/CLionProjects/RG_projekat_svetlo/external/glad/include
+  OBJECT_DIR = include/imgui/CMakeFiles/imgui.dir
+  OBJECT_FILE_DIR = include/imgui/CMakeFiles/imgui.dir/src
+
+build include/imgui/CMakeFiles/imgui.dir/src/imgui_impl_opengl3.cpp.o: CXX_COMPILER__imgui_Debug /home/djole/CLionProjects/RG_projekat_svetlo/include/imgui/src/imgui_impl_opengl3.cpp || cmake_object_order_depends_target_imgui
+  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD
+  DEP_FILE = include/imgui/CMakeFiles/imgui.dir/src/imgui_impl_opengl3.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I/home/djole/CLionProjects/RG_projekat_svetlo/include -I/home/djole/CLionProjects/RG_projekat_svetlo/include/imgui/include -I/home/djole/CLionProjects/RG_projekat_svetlo/external/glad/include
+  OBJECT_DIR = include/imgui/CMakeFiles/imgui.dir
+  OBJECT_FILE_DIR = include/imgui/CMakeFiles/imgui.dir/src
+
+build include/imgui/CMakeFiles/imgui.dir/src/imgui_tables.cpp.o: CXX_COMPILER__imgui_Debug /home/djole/CLionProjects/RG_projekat_svetlo/include/imgui/src/imgui_tables.cpp || cmake_object_order_depends_target_imgui
+  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD
+  DEP_FILE = include/imgui/CMakeFiles/imgui.dir/src/imgui_tables.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I/home/djole/CLionProjects/RG_projekat_svetlo/include -I/home/djole/CLionProjects/RG_projekat_svetlo/include/imgui/include -I/home/djole/CLionProjects/RG_projekat_svetlo/external/glad/include
+  OBJECT_DIR = include/imgui/CMakeFiles/imgui.dir
+  OBJECT_FILE_DIR = include/imgui/CMakeFiles/imgui.dir/src
+
+build include/imgui/CMakeFiles/imgui.dir/src/imgui_widgets.cpp.o: CXX_COMPILER__imgui_Debug /home/djole/CLionProjects/RG_projekat_svetlo/include/imgui/src/imgui_widgets.cpp || cmake_object_order_depends_target_imgui
+  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD
+  DEP_FILE = include/imgui/CMakeFiles/imgui.dir/src/imgui_widgets.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I/home/djole/CLionProjects/RG_projekat_svetlo/include -I/home/djole/CLionProjects/RG_projekat_svetlo/include/imgui/include -I/home/djole/CLionProjects/RG_projekat_svetlo/external/glad/include
+  OBJECT_DIR = include/imgui/CMakeFiles/imgui.dir
+  OBJECT_FILE_DIR = include/imgui/CMakeFiles/imgui.dir/src
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target imgui
+
+
+#############################################
+# Link the static library include/imgui/libimgui.a
+
+build include/imgui/libimgui.a: CXX_STATIC_LIBRARY_LINKER__imgui_Debug include/imgui/CMakeFiles/imgui.dir/src/imgui.cpp.o include/imgui/CMakeFiles/imgui.dir/src/imgui_demo.cpp.o include/imgui/CMakeFiles/imgui.dir/src/imgui_draw.cpp.o include/imgui/CMakeFiles/imgui.dir/src/imgui_impl_glfw.cpp.o include/imgui/CMakeFiles/imgui.dir/src/imgui_impl_opengl3.cpp.o include/imgui/CMakeFiles/imgui.dir/src/imgui_tables.cpp.o include/imgui/CMakeFiles/imgui.dir/src/imgui_widgets.cpp.o || external/glad/libglad.a
+  LANGUAGE_COMPILE_FLAGS = -g
+  OBJECT_DIR = include/imgui/CMakeFiles/imgui.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = include/imgui/libimgui.a
+  TARGET_PDB = imgui.a.dbg
+
+# =============================================================================
 # Target aliases.
 
 build glad: phony external/glad/libglad.a
 
+build imgui: phony include/imgui/libimgui.a
+
 build libglad.a: phony external/glad/libglad.a
+
+build libimgui.a: phony include/imgui/libimgui.a
 
 # =============================================================================
 # Folder targets.
@@ -178,7 +293,7 @@ build libglad.a: phony external/glad/libglad.a
 #############################################
 # Folder: /home/djole/CLionProjects/RG_projekat_svetlo/cmake-build-debug
 
-build all: phony RG_projekat external/glad/all
+build all: phony RG_projekat external/glad/all include/imgui/all
 
 # =============================================================================
 
@@ -188,20 +303,27 @@ build all: phony RG_projekat external/glad/all
 build external/glad/all: phony external/glad/libglad.a
 
 # =============================================================================
+
+#############################################
+# Folder: /home/djole/CLionProjects/RG_projekat_svetlo/cmake-build-debug/include/imgui
+
+build include/imgui/all: phony include/imgui/libimgui.a
+
+# =============================================================================
 # Built-in targets
 
 
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../external/glad/CMakeLists.txt /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCInformation.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCXXInformation.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeGenericSystem.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeInitializeConfigs.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeLanguageInformation.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-C.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-CXX.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/FindOpenGL.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageMessage.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU-C.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Platform/UnixPaths.cmake /usr/lib/x86_64-linux-gnu/cmake/assimp-5.0/assimp-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/assimp-5.0/assimp-config.cmake /usr/lib/x86_64-linux-gnu/cmake/assimp-5.0/assimpTargets-release.cmake /usr/lib/x86_64-linux-gnu/cmake/assimp-5.0/assimpTargets.cmake /usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3Config.cmake /usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3ConfigVersion.cmake /usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3Targets-none.cmake /usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3Targets.cmake CMakeCache.txt CMakeFiles/3.21.1/CMakeCCompiler.cmake CMakeFiles/3.21.1/CMakeCXXCompiler.cmake CMakeFiles/3.21.1/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../external/glad/CMakeLists.txt ../include/imgui/CMakeLists.txt /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCInformation.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCXXInformation.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeGenericSystem.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeInitializeConfigs.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeLanguageInformation.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-C.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-CXX.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/FindOpenGL.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageMessage.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU-C.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Platform/UnixPaths.cmake /usr/lib/x86_64-linux-gnu/cmake/assimp-5.0/assimp-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/assimp-5.0/assimp-config.cmake /usr/lib/x86_64-linux-gnu/cmake/assimp-5.0/assimpTargets-release.cmake /usr/lib/x86_64-linux-gnu/cmake/assimp-5.0/assimpTargets.cmake /usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3Config.cmake /usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3ConfigVersion.cmake /usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3Targets-none.cmake /usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3Targets.cmake CMakeCache.txt CMakeFiles/3.21.1/CMakeCCompiler.cmake CMakeFiles/3.21.1/CMakeCXXCompiler.cmake CMakeFiles/3.21.1/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ../CMakeLists.txt ../external/glad/CMakeLists.txt /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCInformation.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCXXInformation.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeGenericSystem.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeInitializeConfigs.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeLanguageInformation.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-C.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-CXX.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/FindOpenGL.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageMessage.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU-C.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Platform/UnixPaths.cmake /usr/lib/x86_64-linux-gnu/cmake/assimp-5.0/assimp-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/assimp-5.0/assimp-config.cmake /usr/lib/x86_64-linux-gnu/cmake/assimp-5.0/assimpTargets-release.cmake /usr/lib/x86_64-linux-gnu/cmake/assimp-5.0/assimpTargets.cmake /usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3Config.cmake /usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3ConfigVersion.cmake /usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3Targets-none.cmake /usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3Targets.cmake CMakeCache.txt CMakeFiles/3.21.1/CMakeCCompiler.cmake CMakeFiles/3.21.1/CMakeCXXCompiler.cmake CMakeFiles/3.21.1/CMakeSystem.cmake: phony
+build ../CMakeLists.txt ../external/glad/CMakeLists.txt ../include/imgui/CMakeLists.txt /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCInformation.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCXXInformation.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeGenericSystem.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeInitializeConfigs.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeLanguageInformation.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-C.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-CXX.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/FindOpenGL.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageMessage.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU-C.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux.cmake /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/Platform/UnixPaths.cmake /usr/lib/x86_64-linux-gnu/cmake/assimp-5.0/assimp-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/assimp-5.0/assimp-config.cmake /usr/lib/x86_64-linux-gnu/cmake/assimp-5.0/assimpTargets-release.cmake /usr/lib/x86_64-linux-gnu/cmake/assimp-5.0/assimpTargets.cmake /usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3Config.cmake /usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3ConfigVersion.cmake /usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3Targets-none.cmake /usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3Targets.cmake CMakeCache.txt CMakeFiles/3.21.1/CMakeCCompiler.cmake CMakeFiles/3.21.1/CMakeCXXCompiler.cmake CMakeFiles/3.21.1/CMakeSystem.cmake: phony
 
 
 #############################################
