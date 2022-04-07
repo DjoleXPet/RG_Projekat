@@ -1,0 +1,6 @@
+/home/djole/CLionProjects/RG_projekat_svetlo/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/djole/CLionProjects/RG_projekat_svetlo/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/djole/CLionProjects/RG_projekat_svetlo/cmake-build-debug/CMakeFiles/RG_projekat.dir
+/home/djole/CLionProjects/RG_projekat_svetlo/cmake-build-debug/external/glad/CMakeFiles/edit_cache.dir
+/home/djole/CLionProjects/RG_projekat_svetlo/cmake-build-debug/external/glad/CMakeFiles/rebuild_cache.dir
+/home/djole/CLionProjects/RG_projekat_svetlo/cmake-build-debug/external/glad/CMakeFiles/glad.dir
