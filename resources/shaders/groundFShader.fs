@@ -27,7 +27,7 @@ struct DirLight {
 };
 
 uniform sampler2D texture_diffuse1;
-uniform sampler2D texture_normal1;
+// uniform sampler2D texture_normal1;
 
 uniform SpotLight spotLight;
 uniform DirLight dirLight;

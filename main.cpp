@@ -47,13 +47,9 @@ bool ImGuiEnabled = false;
 float deltaTime = 0.0f;	// Time between current frame and last frame
 float lastFrame = 0.0f; // Time of last frame
 
-glm::vec3 lightPos(20,20,20);
+glm::vec3 lightPos = glm::vec3(20,20,20);
 
 
-
-// Lampa lampaSettings;
-
-// glm::vec3 lightDir(25, 25, 25);
 
 int main() {
 
@@ -102,52 +98,50 @@ int main() {
     Shader shaderLampa("../resources/shaders/lampa.vs", "../resources/shaders/lampa.fs");
     Shader shaderMoon("../resources/shaders/moon.vs", "../resources/shaders/moon.fs");
 
-
-
-
-    float cubeVertices[] = {
-            -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-            0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-            0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-            0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-            -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-            -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-
-            -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-            0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-            0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-            0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-            -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-            -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-
-            -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-            -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-            -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-            -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-            -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-            -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-
-            0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-            0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-            0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-            0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-            0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-            0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-
-            -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-            0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-            0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-            0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-            -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-            -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-
-            -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
-            0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
-            0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-            0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-            -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-            -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
-    };
+//
+//    float cubeVertices[] = {
+//            -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+//            0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+//            0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+//            0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+//            -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+//            -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+//
+//            -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+//            0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+//            0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+//            0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+//            -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+//            -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+//
+//            -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+//            -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+//            -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+//            -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+//            -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+//            -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+//
+//            0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+//            0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+//            0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+//            0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+//            0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+//            0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+//
+//            -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+//            0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+//            0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+//            0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+//            -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+//            -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+//
+//            -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+//            0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+//            0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+//            0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+//            -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+//            -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
+//    };
 
     float groundVertices[] = {
                 // koordinate        // teksture
@@ -205,26 +199,26 @@ int main() {
             1.0f, -1.0f,  1.0f
     };
 
-    unsigned int cubeVBO, cubeVAO;
-    glGenVertexArrays(1, &cubeVAO);
-    glGenBuffers(1, &cubeVBO);
-
-    glBindVertexArray(cubeVAO);
-
-    glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), cubeVertices, GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3*sizeof(float)));
-    glEnableVertexAttribArray(1);
-
-    unsigned int lightVAO;
-    glGenVertexArrays(1, &lightVAO);
-    glBindVertexArray(lightVAO);
-    glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
+//    unsigned int cubeVBO, cubeVAO;
+//    glGenVertexArrays(1, &cubeVAO);
+//    glGenBuffers(1, &cubeVBO);
+//
+//    glBindVertexArray(cubeVAO);
+//
+//    glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
+//    glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), cubeVertices, GL_STATIC_DRAW);
+//
+//    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+//    glEnableVertexAttribArray(0);
+//    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3*sizeof(float)));
+//    glEnableVertexAttribArray(1);
+//
+//    unsigned int lightVAO;
+//    glGenVertexArrays(1, &lightVAO);
+//    glBindVertexArray(lightVAO);
+//    glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
+//    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+//    glEnableVertexAttribArray(0);
 
     unsigned int groundVAO, groundVBO;
     glGenVertexArrays(1, &groundVAO);
@@ -242,7 +236,7 @@ int main() {
   //  unsigned int groundNormText = loadTexture("../resources/textures/trava/grassnormal.jpg");
     shaderGround.use();
     shaderGround.setInt("texture_diffuse1", 0);
-    shaderGround.setInt("texture_normal1", 1);
+  //  shaderGround.setInt("texture_normal1", 1);
   //  stbi_set_flip_vertically_on_load(true);
 
     // skybox VAO
@@ -300,7 +294,6 @@ int main() {
     shaderBlend.use();
     shaderBlend.setInt("texture1", 0);
 
-// /////////////
 
     glm::vec3 treePositions[] = {  // POCETNE KOORDINATE DRVECA SU ~ 2, 0, 2
             glm::vec3( 5.0f,  -0.7f,  5.0f),
@@ -310,7 +303,7 @@ int main() {
             glm::vec3( 4.0f, -0.7f, -3.5f),
             glm::vec3(0,  -0.7f, -2.0f),
             glm::vec3( 3.3f, -0.7f, -2.5f),
-            glm::vec3( -5.0f,  -0.7f, 5.0f),
+            glm::vec3( -4.5f,  -0.7f, 4.5f),
             glm::vec3( -2.5f,  -0.7f, 0.5f),
             glm::vec3(0,  -0.7f, -4.5f),
             glm::vec3(-3.0f,  -0.7f, 0.0f),
@@ -324,15 +317,15 @@ int main() {
     // hdr bloom
 
     // HDR BLOOM
-    Shader shaderHdr("../resources/shaders/hdr.vs", "../resources/shaders/hdr.fs");
+ //   Shader shaderHdr("../resources/shaders/hdr.vs", "../resources/shaders/hdr.fs");
     Shader shaderBlur("../resources/shaders/blur.vs", "../resources/shaders/blur.fs");
     Shader shaderBloom("../resources/shaders/bloom.vs", "../resources/shaders/bloom.fs");
 
     shaderBlur.use();
     shaderBlur.setInt("image", 0);
 
-    shaderHdr.use();
-    shaderHdr.setInt("hdrBuffer", 0);
+//    shaderHdr.use();
+//    shaderHdr.setInt("hdrBuffer", 0);
 
     shaderBloom.use();
     shaderBloom.setInt("scene", 0);
@@ -412,7 +405,6 @@ int main() {
             std::cout << "Framebuffer not complete!" << std::endl;
     }
 
-
     // / //////////////////////
 
 
@@ -438,7 +430,7 @@ int main() {
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
 
-    lampaSettings.position = glm::vec3(2, 1, 2);
+    lampaSettings.position = glm::vec3(2, 0, 2);
     lampaSettings.direction = glm::vec3(0,0,-1);
 
     lampaSettings.ambient = glm::vec3( 0.0f, 0.0f, 0.0f);
@@ -520,11 +512,6 @@ int main() {
         mesec.Draw(shaderMoon);
 
 
-
-
-        // /////////
-
-        shaderProba.setUniform3f("dirLight.ambient", lightColor); // vraca se na podrazumevanu
         // ground
         shaderGround.use();
 
@@ -566,7 +553,7 @@ int main() {
         shaderProba.setUniformMat4("view", view);
 
         shaderProba.setUniform3f("dirLight.direction", -lightPos);
-        shaderProba.setUniform3f("dirLight.ambient", 5.0f*lightColor); //
+        shaderProba.setUniform3f("dirLight.ambient", lightColor); //
         shaderProba.setUniform3f("dirLight.diffuse", lightColor);
         shaderProba.setUniform3f("dirLight.specular", lightColor);
 
@@ -729,20 +716,17 @@ int main() {
 
         // 3. now render floating point color buffer to 2D quad and tonemap HDR colors to default framebuffer's (clamped) color range
         // --------------------------------------------------------------------------------------------------------------------------
-
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         shaderBloom.use();
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, colorBuffers[0]);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, pingpongColorbuffers[!horizontal]);
-
-
         shaderBloom.setInt("bloom", bloom);
         shaderBloom.setFloat("exposure", exposure);
         renderQuad();
-     //   std::cout << "bloom: " << (bloom ? "on" : "off") << std::endl;
 
+     //   std::cout << "bloom: " << (bloom ? "on" : "off") << std::endl;
 
 
         if (ImGuiEnabled)
@@ -912,7 +896,7 @@ unsigned int loadTexture(char const * path)
         glGenerateMipmap(GL_TEXTURE_2D);
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); //format == GL_RGBA ? GL_CLAMP_TO_EDGE : GL_REPEAT); // for this tutorial: use GL_CLAMP_TO_EDGE to prevent semi-transparent borders. Due to interpolation it takes texels from next repeat
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT); //format == GL_RGBA ? GL_CLAMP_TO_EDGE : GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, format == GL_RGBA ? GL_CLAMP_TO_EDGE : GL_REPEAT);
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
