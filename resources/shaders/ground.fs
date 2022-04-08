@@ -49,61 +49,6 @@ void main()
 }
 
 
-// void main(){
-//
-// //
-// //        float ambientStrength = 0.5;
-// //        vec3 ambient = ambientStrength * light.ambient;
-// //
-// //         vec3 norm = normalize(Normal);
-// //         vec3 lightPos = normalize(light.direction);
-// //         float diff = max(dot(norm, lightPos), 0.0);
-// //         vec3 diffuse = diff * light.diffuse;
-// //
-// //        float specularStrength = 0.5;
-// //        vec3 viewDir = normalize(viewPos - FragPos);
-// //
-// //        vec3 halfwayDir = normalize(lightPos + viewDir);
-// //        float spec = pow(max(dot(norm, halfwayDir), 0.0), 4);
-// //
-// // //         vec3 reflectDir = reflect(-lightPos, norm);
-// // //         float spec = pow(max(dot(viewDir, reflectDir), 0.0), 4);
-// //        vec3 specular = specularStrength * spec * light.specular;
-// //
-// //        vec3 result = (ambient + specular + diffuse) * vec3(0.0f, 0.7f, 0.2f);
-// //        FragColor = vec4(result, 1.0);
-// //
-//
-//
-//
-//             // obtain normal from normal map in range [0,1]
-//            vec3 norm = texture(texture_normal1, TexCoords).rgb;
-//            // transform normal vector to range [-1,1]
-//            norm = normalize(norm * 2.0 - 1.0);  // this normal is in tangent space
-//
-//            // get diffuse color
-//            vec3 color = texture(texture_diffuse1, TexCoords).rgb;
-//            // ambient
-//            vec3 ambient = dirLight.ambient * color;
-//            // diffuse
-//            vec3 lightPos = normalize(-dirLight.direction);
-//            float diff = max(dot(lightPos, norm), 0.0);
-//            vec3 diffuse = diff * color * dirLight.diffuse;
-//            // specular
-//
-//            //         vec3 reflectDir = reflect(-lightPos, norm);
-//            //         float spec = pow(max(dot(viewDir, reflectDir), 0.0), 4);
-//
-//            vec3 viewDir = normalize(viewPos - FragPos);
-//            vec3 reflectDir = reflect(-lightPos, norm);
-//            vec3 halfwayDir = normalize(lightPos + viewDir);
-//            float spec = pow(max(dot(norm, halfwayDir), 0.0), 4.0);
-//
-//            vec3 specular = vec3(0.2) * spec;
-//            FragColor = vec4(ambient + diffuse + specular, 1.0);
-// };
-
-
 // calculates the color when using a directional light.
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 {
