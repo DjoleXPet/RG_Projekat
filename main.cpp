@@ -58,7 +58,7 @@ int main() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Proba", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "RG_Projekat", nullptr, nullptr);
     if(window == nullptr)
     {
         std::cout << "Failed to create window";
@@ -911,7 +911,7 @@ void DrawImGui() {
         ImGui::Begin("Lamp Settings");
         ImGui::ColorEdit3("Lamp Diffuse color" , (float*)&lampaSettings.diffuse);
         ImGui::ColorEdit3("Lamp Specular color" , (float*)&lampaSettings.specular);
-      //  ImGui::DragFloat("Precnik lampe", (float*)&lampaSettings.outerCutOff, 0.1f,glm::radians(20.0f),glm::radians(50.0f));
+        ImGui::DragFloat("Lamp outer cutoff", (float*)&lampaSettings.outerCutOff, 0.1f,glm::radians(20.0f),glm::radians(50.0f));
 
         ImGui::End();
     }
