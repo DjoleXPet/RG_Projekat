@@ -1,10 +1,10 @@
-# RGprojekat
+# RG_Projekat
 
 ## Kontrole
 
 `W A S D` - Pomeranje kamere
 
-`Mis` - Gledanje unaokolo
+`Mouse` - Gledanje unaokolo
 
 `Arrow keys` - Rotiranje lampe
 
