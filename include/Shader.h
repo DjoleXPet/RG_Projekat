@@ -130,7 +130,7 @@ public:
     }
     void setInt(const char *varName, int i0) {
         int varId = glGetUniformLocation(m_shaderProgramId, varName);
-        glUniform1d(varId, i0);
+        glUniform1i(varId, i0);
     }
     void setUniformMat4(const char* varName, glm::mat4 transform){
         int varId = glGetUniformLocation(m_shaderProgramId, varName);

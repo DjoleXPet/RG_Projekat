@@ -65,6 +65,7 @@ public:
         WorldUp = up;
         Yaw = yaw;
         Pitch = pitch;
+
         updateLampaVectors();
     }
     // constructor with scalar values
