@@ -1,15 +1,16 @@
 # RGprojekat
 
 ## Kontrole
-### WASD - Pomeranje kamere
 
-### Mis - Gledanje unaokolo
+`W A S D` - Pomeranje kamere
 
-### Arrow keys - Rotiranje lampe
+`Mis` - Gledanje unaokolo
 
-### Tab - Otvaranje Ui sa podasavanjima kamere
+`Arrow keys` - Rotiranje lampe
 
-### Space - Ukljucivanje/Iskljucivanje Bloom efekta
+`Tab` - Otvaranje Ui sa podasavanjima kamere
+
+`B` - Ukljucivanje/Iskljucivanje Bloom efekta
 
 ## Oblasti
 
