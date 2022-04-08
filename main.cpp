@@ -84,16 +84,14 @@ int main() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 450 core");
 
-
-
     glEnable(GL_DEPTH_TEST);
     // SHADER
-    Shader shaderCube("../resources/shaders/cubeVShader.vs", "../resources/shaders/cubeFShader.fs");
-    Shader shaderLight("../resources/shaders/lightVShader.vs", "../resources/shaders/lightFShader.fs");
+//    Shader shaderCube("../resources/shaders/cubeVShader.vs", "../resources/shaders/cubeFShader.fs");
+//    Shader shaderLight("../resources/shaders/lightVShader.vs", "../resources/shaders/lightFShader.fs");
     Shader shaderGround("../resources/shaders/groundVShader.vs", "../resources/shaders/groundFShader.fs");
-    Shader shaderModel("../resources/shaders/modelVShader.vs","../resources/shaders/modelFShader.fs");
+//    Shader shaderModel("../resources/shaders/modelVShader.vs","../resources/shaders/modelFShader.fs");
     Shader skyboxShader("../resources/shaders/skybox.vs","../resources/shaders/skybox.fs");
-    Shader shaderProba("../resources/shaders/model.vs", "../resources/shaders/model.fs");
+    Shader shaderModel("../resources/shaders/model.vs", "../resources/shaders/model.fs");
     Shader shaderBlend("../resources/shaders/blend.vs", "../resources/shaders/blend.fs");
     Shader shaderLampa("../resources/shaders/lampa.vs", "../resources/shaders/lampa.fs");
     Shader shaderMoon("../resources/shaders/moon.vs", "../resources/shaders/moon.fs");
@@ -235,7 +233,7 @@ int main() {
     unsigned int groundDiffText = loadTexture("../resources/textures/trava/seamless.jpg");   // NOVA TEKSTURA
   //  unsigned int groundNormText = loadTexture("../resources/textures/trava/grassnormal.jpg");
     shaderGround.use();
-    shaderGround.setInt("texture_diffuse1", 0);
+    shaderGround.setInt("texture1", 0);
   //  shaderGround.setInt("texture_normal1", 1);
   //  stbi_set_flip_vertically_on_load(true);
 
@@ -406,8 +404,10 @@ int main() {
     }
 
     // / //////////////////////
-
-
+    Model sator("../resources/objects/sator3/10495_Green_Mesh_Tent_V1_L3.obj");
+    Model drvo("../resources/objects/drvo/drvo.obj");
+    Model lampa("../resources/objects/lampa/Flashlight.obj");
+    Model mesec("../resources/objects/mesec/Moon_2K.obj");
 
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
@@ -421,16 +421,11 @@ int main() {
     camera.Front = glm::vec3(0,0,-1);
     camera.WorldUp = glm::vec3(0,1,0);
 
-    Model sator("../resources/objects/sator3/10495_Green_Mesh_Tent_V1_L3.obj");
-    Model drvo("../resources/objects/drvo/drvo.obj");
-    Model lampa("../resources/objects/lampa/Flashlight.obj");
-    Model mesec("../resources/objects/mesec/Moon_2K.obj");
-
 
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
 
-    lampaSettings.position = glm::vec3(2, 0, 2);
+    lampaSettings.position = glm::vec3(2, 0.5, 2);
     lampaSettings.direction = glm::vec3(0,0,-1);
 
     lampaSettings.ambient = glm::vec3( 0.0f, 0.0f, 0.0f);
@@ -453,8 +448,8 @@ int main() {
 
         processInput(window);
 
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+      //  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+       // glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
         //  HDR
         glBindFramebuffer(GL_FRAMEBUFFER, hdrFBO);
@@ -463,15 +458,11 @@ int main() {
 
         //    lightPos = glm::vec3(cos(currentFrame/5)*25, sin(currentFrame/5)*25,25);
 
-
         lampaSettings.direction = lampaSettings.Front;
 
-
-        // lightbox
-       // shaderLight.use();
         // BOJA SVETLA
-        glm::vec3 lightColor = glm::vec3(0.076f, 0.077f,0.080f);   // smanji za 10 za mrak
-       // shaderLight.setUniform3f("lightColor", lightColor);
+        glm::vec3 lightColor = glm::vec3(0.0096f, 0.0093f,0.0084f);   // smanji za 10 za mrak
+
 
         glm::mat4 view          = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
         glm::mat4 projection    = glm::mat4(1.0f);
@@ -486,24 +477,12 @@ int main() {
         shaderMoon.setUniformMat4("projection", projection); // note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
         shaderMoon.setUniformMat4("view", view);
 
-        shaderMoon.setUniform3f("dirLight.direction", -lightPos);
+        shaderMoon.setUniform3f("dirLight.direction", -lightPos);  // mesec se obasjava sa druge strane
         shaderMoon.setUniform3f("dirLight.ambient", lightColor);
         shaderMoon.setUniform3f("dirLight.diffuse", 10.0f*lightColor);
         shaderMoon.setUniform3f("dirLight.specular", lightColor);
 
-        shaderMoon.setUniform3f("spotLight.position",  lampaSettings.position);
-        shaderMoon.setUniform3f("spotLight.direction", lampaSettings.direction);
-        shaderMoon.setUniform3f("spotLight.ambient", lampaSettings.ambient);
-        shaderMoon.setUniform3f("spotLight.diffuse", lampaSettings.diffuse);
-        shaderMoon.setUniform3f("spotLight.specular", lampaSettings.specular);
-        shaderMoon.setFloat("spotLight.constant", lampaSettings.constant);
-        shaderMoon.setFloat("spotLight.linear", lampaSettings.linear);
-        shaderMoon.setFloat("spotLight.quadratic", lampaSettings.quadratic);
-        shaderMoon.setFloat("spotLight.cutOff", lampaSettings.cutOff);
-        shaderMoon.setFloat("spotLight.outerCutOff", lampaSettings.outerCutOff);
-
         shaderMoon.setUniform3f("viewPos", camera.Position);
-
 
         model = glm::mat4(1.0f);
         model = glm::translate(model, lightPos);
@@ -537,38 +516,36 @@ int main() {
         shaderGround.setFloat("spotLight.cutOff", lampaSettings.cutOff);
         shaderGround.setFloat("spotLight.outerCutOff", lampaSettings.outerCutOff);
 
-
         shaderGround.setUniform3f("viewPos", camera.Position);
+
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, groundDiffText);
-//        glActiveTexture(GL_TEXTURE1);
-//        glBindTexture(GL_TEXTURE_2D, groundNormText);
 
         glBindVertexArray(groundVAO);
         glDrawArrays(GL_TRIANGLES, 0, 6);
 
 
-        shaderProba.use();
-        shaderProba.setUniformMat4("projection", projection); // note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
-        shaderProba.setUniformMat4("view", view);
+        shaderModel.use();
+        shaderModel.setUniformMat4("projection", projection); // note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
+        shaderModel.setUniformMat4("view", view);
 
-        shaderProba.setUniform3f("dirLight.direction", -lightPos);
-        shaderProba.setUniform3f("dirLight.ambient", lightColor); //
-        shaderProba.setUniform3f("dirLight.diffuse", lightColor);
-        shaderProba.setUniform3f("dirLight.specular", lightColor);
+        shaderModel.setUniform3f("dirLight.direction", -lightPos);
+        shaderModel.setUniform3f("dirLight.ambient", lightColor); //
+        shaderModel.setUniform3f("dirLight.diffuse", lightColor);
+        shaderModel.setUniform3f("dirLight.specular", lightColor);
 
-        shaderProba.setUniform3f("spotLight.position",  lampaSettings.position);
-        shaderProba.setUniform3f("spotLight.direction", lampaSettings.direction);
-        shaderProba.setUniform3f("spotLight.ambient", lampaSettings.ambient);
-        shaderProba.setUniform3f("spotLight.diffuse", lampaSettings.diffuse);
-        shaderProba.setUniform3f("spotLight.specular", lampaSettings.specular);
-        shaderProba.setFloat("spotLight.constant", lampaSettings.constant);
-        shaderProba.setFloat("spotLight.linear", lampaSettings.linear);
-        shaderProba.setFloat("spotLight.quadratic", lampaSettings.quadratic);
-        shaderProba.setFloat("spotLight.cutOff", lampaSettings.cutOff);
-        shaderProba.setFloat("spotLight.outerCutOff", lampaSettings.outerCutOff);
+        shaderModel.setUniform3f("spotLight.position", lampaSettings.position);
+        shaderModel.setUniform3f("spotLight.direction", lampaSettings.direction);
+        shaderModel.setUniform3f("spotLight.ambient", lampaSettings.ambient);
+        shaderModel.setUniform3f("spotLight.diffuse", lampaSettings.diffuse);
+        shaderModel.setUniform3f("spotLight.specular", lampaSettings.specular);
+        shaderModel.setFloat("spotLight.constant", lampaSettings.constant);
+        shaderModel.setFloat("spotLight.linear", lampaSettings.linear);
+        shaderModel.setFloat("spotLight.quadratic", lampaSettings.quadratic);
+        shaderModel.setFloat("spotLight.cutOff", lampaSettings.cutOff);
+        shaderModel.setFloat("spotLight.outerCutOff", lampaSettings.outerCutOff);
 
-        shaderProba.setUniform3f("viewPos", camera.Position);
+        shaderModel.setUniform3f("viewPos", camera.Position);
 
 
 
@@ -579,10 +556,10 @@ int main() {
         model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1,0,0));
         model = glm::scale(model, glm::vec3(0.01,0.01,0.01));
 
-        shaderProba.setUniformMat4("model", model);
+        shaderModel.setUniformMat4("model", model);
 
 
-        sator.Draw(shaderProba);
+        sator.Draw(shaderModel);
 
 
         for (unsigned int i = 0; i < 15; i++)
@@ -593,8 +570,8 @@ int main() {
             model = glm::rotate(model, glm::radians(-90.f), glm::vec3(1,0,0));
             model = glm::scale(model, glm::vec3(0.01,0.01,0.01));
 
-            shaderProba.setUniformMat4("model", model);
-            drvo.Draw(shaderProba);
+            shaderModel.setUniformMat4("model", model);
+            drvo.Draw(shaderModel);
         }
         // lampa
         shaderLampa.use();
@@ -706,6 +683,7 @@ int main() {
         {
             glBindFramebuffer(GL_FRAMEBUFFER, pingpongFBO[horizontal]);
             shaderBlur.setInt("horizontal", horizontal);
+       //     glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, first_iteration ? colorBuffers[1] : pingpongColorbuffers[!horizontal]);  // bind texture of other framebuffer (or scene if first iteration)
             renderQuad();
             horizontal = !horizontal;
@@ -713,15 +691,14 @@ int main() {
                 first_iteration = false;
         }
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-        // 3. now render floating point color buffer to 2D quad and tonemap HDR colors to default framebuffer's (clamped) color range
-        // --------------------------------------------------------------------------------------------------------------------------
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         shaderBloom.use();
+
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, colorBuffers[0]);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, pingpongColorbuffers[!horizontal]);
+
         shaderBloom.setInt("bloom", bloom);
         shaderBloom.setFloat("exposure", exposure);
         renderQuad();
@@ -737,9 +714,9 @@ int main() {
     }
 
 
-    shaderCube.deleteProgram();
+
     shaderGround.deleteProgram();
-    shaderLight.deleteProgram();
+
 
 
     ImGui_ImplOpenGL3_Shutdown();
