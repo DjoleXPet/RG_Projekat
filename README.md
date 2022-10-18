@@ -1,6 +1,6 @@
 # RG_Projekat
 
-### OpenGl project featuring Cubemapa Skybox, HDR and Bloom
+### OpenGl project featuring Cubemaps Skybox, HDR and Bloom
 
 ## Kontrole
 
