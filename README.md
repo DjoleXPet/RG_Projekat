@@ -1,5 +1,7 @@
 # RG_Projekat
 
+### OpenGl project featuring Cubemapa Skybox, HDR and Bloom
+
 ## Kontrole
 
 `W A S D` - Pomeranje kamere
